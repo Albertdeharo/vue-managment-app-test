@@ -2,7 +2,7 @@
     <v-container grid-list-xl>
         <v-layout row wrap>
 
-
+                <!-- CARD TASK -->
             <v-flex md6>
                 <v-card class="mb-3" v-for="(item, index) in tasksList" :key="index">
                     <v-card-text>
@@ -19,19 +19,32 @@
 
 
                         <p>{{item.descripcion}}</p>
-                        <v-btn color="warning" class="mx-3 ml-0">Editar</v-btn>
+                        <v-btn color="warning" class="mx-3 ml-0"  @click="editarTarea(index)">Editar</v-btn>
                         <v-btn color="error" @click="eliminarTarea(item.id)">Eliminar</v-btn>
                     </v-card-text>
                 </v-card>
             </v-flex>
 
 
-            <v-flex md6 >
+                    <!-- FORM -->
+
+            <v-flex md6 v-if="formAgregar">
                 <v-card class="mb-3 pa-3">
                     <v-form @submit.prevent="agregarTarea">
                         <v-text-field label="Insert Name" v-model="titulo"></v-text-field>
                         <v-textarea label="description" v-model="descripcion"></v-textarea>
                         <v-btn block color="success" type="submit">Add task</v-btn>
+                    </v-form>
+                </v-card>
+            </v-flex>
+
+                    <!-- FORM EDIT VIEW -->
+            <v-flex md6 >
+                <v-card class="mb-3 pa-3" v-if="!formAgregar">
+                    <v-form @submit.prevent="saveEdit">
+                        <v-text-field label="Insert Name" v-model="titulo"></v-text-field>
+                        <v-textarea label="description" v-model="descripcion"></v-textarea>
+                        <v-btn block color="warning" type="submit">Edit task</v-btn>
                     </v-form>
                 </v-card>
             </v-flex>
@@ -81,7 +94,9 @@ export default {
             titulo: '',
             descripcion: '',
             snackbar: false,
-            mensaje:''
+            mensaje:'',
+            formAgregar: true,
+            indexTarea: ''
         }
     },
     methods: {
@@ -105,6 +120,21 @@ export default {
         },
         eliminarTarea(id){
             this.tasksList = this.tasksList.filter(e => e.id != id)
+        },
+        editarTarea(index){
+            this.formAgregar = false
+            this.titulo = this.tasksList[index].titulo
+            this.descripcion = this.tasksList[index].descripcion
+            this.indexTarea = index
+        },
+        saveEdit(){
+            this.tasksList[this.indexTarea].titulo = this.titulo
+            this.tasksList[this.indexTarea].descripcion = this.descripcion
+            this.formAgregar = true
+            this.titulo = ''
+            this.descripcion = ''
+            this.mensaje = 'Edit correct'
+            
         }
     }
 }
