@@ -1,13 +1,17 @@
 <template>
-  <HelloWorld />
+  <v-container>
+    <v-layout>
+      <v-flex>
+        <v-card>josids</v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld';
+
 
 export default {
-  components: {
-    HelloWorld,
-  },
+
 };
 </script>
