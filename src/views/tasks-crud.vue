@@ -20,7 +20,7 @@
 
                         <p>{{item.descripcion}}</p>
                         <v-btn color="warning" class="mx-3 ml-0">Editar</v-btn>
-                        <v-btn color="error">Eliminar</v-btn>
+                        <v-btn color="error" @click="eliminarTarea(item.id)">Eliminar</v-btn>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -102,6 +102,9 @@ export default {
                 this.mensaje = 'Tarea agregada'
 
             }
+        },
+        eliminarTarea(id){
+            this.tasksList = this.tasksList.filter(e => e.id != id)
         }
     }
 }
