@@ -31,6 +31,31 @@
             <v-flex md6 v-if="formAgregar">
                 <v-card class="mb-3 pa-3">
                     <v-form @submit.prevent="agregarTarea">
+                        <!-- Building SELECT -->
+                        <v-select
+                            v-model="Buildings"
+                            :items="items"
+                            :rules="[v => !!v || 'Item is required']"
+                            label="Select Build"
+                            required
+                        ></v-select>
+                        <!-- Appartment SELECT -->
+                        <v-select
+                            v-model="Appartments"
+                            :items="Appartments"
+                            :rules="[v => !!v || 'Item is required']"
+                            label="Select Appartment"
+                            required
+                        ></v-select>
+                        <!-- Room SELECT -->
+                        <v-select
+                            v-model="Rooms"
+                            :items="Rooms"
+                            :rules="[v => !!v || 'Item is required']"
+                            label="Select Room"
+                            required
+                        ></v-select>
+
                         <v-text-field label="Insert Name" v-model="titulo"></v-text-field>
                         <v-textarea label="description" v-model="descripcion"></v-textarea>
                         <v-btn block color="success" type="submit">Add task</v-btn>
@@ -42,6 +67,24 @@
             <v-flex md6 >
                 <v-card class="mb-3 pa-3" v-if="!formAgregar">
                     <v-form @submit.prevent="saveEdit">
+                        <!-- Building SELECT -->
+                        <v-select
+                            v-model="select"
+                            :items="items"
+                            :rules="[v => !!v || 'Item is required']"
+                            label="Item"
+                            required
+                        ></v-select>
+                        <!-- Appartment SELECT -->
+                        <v-select
+                            v-model="select"
+                            :items="items"
+                            :rules="[v => !!v || 'Item is required']"
+                            label="Item"
+                            required
+                        ></v-select>
+
+
                         <v-text-field label="Insert Name" v-model="titulo"></v-text-field>
                         <v-textarea label="description" v-model="descripcion"></v-textarea>
                         <v-btn block color="warning" type="submit">Edit task</v-btn>
@@ -96,7 +139,25 @@ export default {
             snackbar: false,
             mensaje:'',
             formAgregar: true,
-            indexTarea: ''
+            indexTarea: '',
+
+            items: [
+            'Building 1',
+            'Building 2',
+            'Building 3',
+            'Building 4',
+            ],
+
+            Appartments: [
+                'Appartment 1',
+                'Appartment 2',
+            ],
+
+            Rooms:[
+                'Room 1',
+                'Room 2',
+                'Room 3',
+            ]
         }
     },
     methods: {

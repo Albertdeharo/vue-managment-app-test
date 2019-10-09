@@ -2,7 +2,7 @@
   <v-container>
     <v-layout>
       <v-flex>
-        <v-card>josids</v-card>
+        Hello World
       </v-flex>
     </v-layout>
   </v-container>
