@@ -2,7 +2,7 @@
   <v-app>
     <!-- TOOLBAR -->
 <div>
-    <v-toolbar app src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
+    <v-toolbar src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Managment task application with Vue.js</v-toolbar-title>
 
