@@ -20,19 +20,29 @@
                         <!-- taskDone show -->
                         <span>{{item.taskDone}}</span>
                         <!-- Date picker show -->
-                        <div class="font-weight-regular grey--text">{{item.picker}}</div>
+                        <div class="font-weight-regular grey--text">
+                        <v-icon>mdi-calendar</v-icon>
+                        {{item.picker}}</div>
                         <!-- Building Appartment Room show -->
                         <div>
-                            {{item.Building}} - {{item.Appartment}} - {{item.Room}}
-                        </div>
+                           <v-icon>mdi-home-modern</v-icon>{{item.Building}} 
+                           <v-icon>mdi-home</v-icon>{{item.Appartment}}
+                           <v-icon>mdi-home-map-marker</v-icon>{{item.Room}}
+                        </div><br>
                         <!-- Action to do show -->
-                        <p>Action to do : {{item.descripcion}}</p>
+                        <p><strong>Action to do :</strong> {{item.descripcion}}</p>
                         <!-- email show -->
-                        <p>@email : {{item.email}}</p>
+                        <p>
+                        <v-icon>mdi-email-outline</v-icon>:
+                        {{item.email}}</p>
                         <!-- Phone number show -->
-                        <p>Phone number : {{item.phoneNumber}}</p>
+                        <p>
+                        <v-icon>mdi-phone</v-icon>   
+                        Phone number : {{item.phoneNumber}}</p>
 
-                        <v-btn color="warning" class="mx-3 ml-0"  @click="editarTarea(index)">Editar</v-btn>
+                        <v-btn color="warning" class="mx-3 ml-0"  @click="editarTarea(index)">
+                            <v-icon>mdi-nintendo-switch</v-icon>
+                            Editar</v-btn>
 
                         <v-btn color="error" @click="eliminarTarea(item.id)">
                             <v-icon>mdi-delete-circle</v-icon>
@@ -78,7 +88,10 @@
                         ></v-switch>
                         
                         <!-- Date PICKER -->
-                        <div>Select a day: </div>
+                        <div>
+                        Select a day:
+                        <v-icon>mdi-calendar-plus</v-icon>
+                        </div>
                         <v-row justify="center">
                         <v-date-picker 
                         v-model="picker"
@@ -87,6 +100,9 @@
                         ></v-date-picker>
                         </v-row>
                         <!-- Name of responsable -->
+                        <div class="mt-5">
+                        Name <v-icon>mdi-account</v-icon>
+                        </div>
                         <v-text-field
                         v-model="name"
                         :counter="30"
@@ -94,18 +110,21 @@
                         required
                         ></v-text-field>
                         <!-- @Email of responsable -->
+                        Email <v-icon>mdi-email</v-icon>
                         <v-text-field
                         v-model="email"
                         label="E-mail"
                         required
                         ></v-text-field>
                         <!-- Phone Number -->
+                        Phone<v-icon>mdi-cellphone-basic</v-icon> 
                         <v-text-field
                         v-model="phoneNumber"
-                        label="(phone number) +33"
+                        label="Insert phone number (+33)"
                         type="tel"
                         required
-                        ></v-text-field>
+                        >
+                        </v-text-field>
 
                         <v-btn block color="success" type="submit">Add task</v-btn>
                     </v-form>
@@ -146,7 +165,10 @@
                         ></v-switch>
                         
                         <!-- Date PICKER -->
-                        <div>Select a day: </div>
+                        <div>
+                        Select a day:
+                        <v-icon>mdi-calendar-plus</v-icon>
+                        </div>
                         <v-row justify="center">
                         <v-date-picker 
                         v-model="picker"
@@ -155,6 +177,9 @@
                         ></v-date-picker>
                         </v-row>
                         <!-- Name of responsable -->
+                        <div class="mt-5">
+                        Name <v-icon>mdi-account</v-icon>
+                        </div>
                         <v-text-field
                         v-model="name"
                         :counter="30"
@@ -162,18 +187,21 @@
                         required
                         ></v-text-field>
                         <!-- @Email of responsable -->
+                        Email <v-icon>mdi-email</v-icon>
                         <v-text-field
                         v-model="email"
                         label="E-mail"
                         required
                         ></v-text-field>
                         <!-- Phone Number -->
+                        Phone<v-icon>mdi-cellphone-basic</v-icon> 
                         <v-text-field
                         v-model="phoneNumber"
-                        label="(phone number) +33"
+                        label="Insert phone number (+33)"
                         type="tel"
                         required
-                        ></v-text-field>
+                        >
+                        </v-text-field>
                         <v-btn block color="warning" type="submit">Edit task</v-btn>
                     </v-form>
                 </v-card>
@@ -183,20 +211,20 @@
         </v-layout>
 
 
-<!-- SNACKBAR // ALERT-->
-<v-snackbar
-v-model="snackbar"
+                    <!-- SNACKBAR // ALERT-->
+                    <v-snackbar
+                            v-model="snackbar"
 
-    >
-    {{ snackbarText }}
-    <v-btn
-    dark
-    text
-    @click="snackbar = false"
->
-        Close
-</v-btn>
-</v-snackbar>
+                            >
+                            {{ snackbarText }}
+                            <v-btn
+                            dark
+                            text
+                            @click="snackbar = false"
+                            >
+                                Close
+                            </v-btn>
+                    </v-snackbar>
 
 
 
@@ -256,7 +284,7 @@ export default {
                 this.Building ===''
                 ){
                 this.snackbar = true
-                this.snackbarText = 'llena todos los campos'
+                this.snackbarText = 'Please insert all fields'
             }else{
                 this.tasksList.push({
                     id: Date.now(),
@@ -315,8 +343,15 @@ export default {
             this.tasksList[this.indexTarea].email = this.email
             this.tasksList[this.indexTarea].phoneNumber = this.phoneNumber
             this.formAgregar = true
-            this.name = ''
+            this.Building = ''
+            this.Appartment = ''
+            this.Room = ''
             this.descripcion = ''
+            this.taskDone = ''
+            this.picker = ''
+            this.name = ''
+            this.email = ''
+            this.phoneNumber = ''
 
             this.snackbar = true
             this.snackbarText = 'Edit correct'
