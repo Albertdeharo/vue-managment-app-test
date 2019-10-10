@@ -3,7 +3,8 @@
         <v-layout row wrap>
 
                 <!-- CARD TASK TEMPALTE -->
-            <v-flex md6>
+            <v-flex md4>
+                <h1 class="text-center">CARDS LIST</h1>
                 <v-card class="mb-3" v-for="(item, index) in tasksList" :key="index">
                     <v-card-text>
                         <!-- TAG CHIP -->    
@@ -14,8 +15,12 @@
                         text-color="white"
                         >
                         <v-icon left>mdi-account-circle-outline</v-icon>
-                        John Leider
+                        {{item.name}}
                         </v-chip>
+                        <!-- taskDone show -->
+                        <span>{{item.taskDone}}</span>
+                        <!-- Date picker show -->
+                        <div class="font-weight-regular grey--text">{{item.picker}}</div>
                         <!-- Building Appartment Room show -->
                         <div>
                             {{item.Building}} - {{item.Appartment}} - {{item.Room}}
@@ -23,10 +28,9 @@
                         <!-- Action to do show -->
                         <p>Action to do : {{item.descripcion}}</p>
                         <!-- email show -->
-                        <p>{{item.email}}</p>
+                        <p>@email : {{item.email}}</p>
                         <!-- Phone number show -->
-                        <p>{{item.phoneNumber}}</p>
-                        <div class="font-weight-regular grey--text">{{item.email}}</div>
+                        <p>Phone number : {{item.phoneNumber}}</p>
 
                         <v-btn color="warning" class="mx-3 ml-0"  @click="editarTarea(index)">Editar</v-btn>
 
@@ -40,45 +44,51 @@
 
 
                     <!-- FORM -->
-
-            <v-flex md6 v-if="formAgregar">
+            <v-flex md8 v-if="formAgregar">
+                <h1 class="text-center">FORM</h1>
                 <v-card class="mb-3 pa-3">
                     <v-form @submit.prevent="agregarTarea">
                         <!-- Building SELECT -->
                         <v-select
-                            v-model="Building"
-                            :items="Buildings"
-                            :rules="[v => !!v || 'Item is required']"
-                            label="Select Build"
-                            required
+                        v-model="Building"
+                        :items="Buildings"
+                        label="Select Build"
                         ></v-select>
                         <!-- Appartment SELECT -->
                         <v-select
-                            v-model="Appartment"
-                            :items="Appartments"
-                            :rules="[v => !!v || 'Item is required']"
-                            label="Select Appartment"
-                            required
+                        v-model="Appartment"
+                        :items="Appartments"
+                        label="Select Appartment"
                         ></v-select>
                         <!-- Room SELECT -->
                         <v-select
-                            v-model="Room"
-                            :items="Rooms"
-                            :rules="[v => !!v || 'Item is required']"
-                            label="Select Room"
-                            required
+                        v-model="Room"
+                        :items="Rooms"
+                        label="Select Room"
                         ></v-select>
                         <!-- Action to do -->
-                        <v-textarea label="description" v-model="descripcion"></v-textarea>
+                        <v-textarea 
+                        label="Action to do :" 
+                        v-model="descripcion"
+                        ></v-textarea>
                         <!-- Task DONE -->
-                        <v-switch v-model="taskDone"></v-switch>
+                        <div>Activate if task is done:</div>
+                        <v-switch 
+                        v-model="taskDone"
+                        ></v-switch>
+                        
                         <!-- Date PICKER -->
-                         <v-row justify="center">
-                            <v-date-picker v-model="picker"></v-date-picker>
-                         </v-row>
+                        <div>Select a day: </div>
+                        <v-row justify="center">
+                        <v-date-picker 
+                        v-model="picker"
+                        full-width=""
+                        landscape=""
+                        ></v-date-picker>
+                        </v-row>
                         <!-- Name of responsable -->
                         <v-text-field
-                        v-model="titulo"
+                        v-model="name"
                         :counter="30"
                         label="Name of responsable"
                         required
@@ -108,24 +118,62 @@
                     <v-form @submit.prevent="saveEdit">
                         <!-- Building SELECT -->
                         <v-select
-                            v-model="select"
-                            :items="items"
-                            :rules="[v => !!v || 'Item is required']"
-                            label="Item"
-                            required
+                        v-model="Building"
+                        :items="Buildings"
+                        label="Select Build"
                         ></v-select>
                         <!-- Appartment SELECT -->
                         <v-select
-                            v-model="select"
-                            :items="items"
-                            :rules="[v => !!v || 'Item is required']"
-                            label="Item"
-                            required
+                        v-model="Appartment"
+                        :items="Appartments"
+                        label="Select Appartment"
                         ></v-select>
-
-
-                        <v-text-field label="Insert Name" v-model="titulo"></v-text-field>
-                        <v-textarea label="description" v-model="descripcion"></v-textarea>
+                        <!-- Room SELECT -->
+                        <v-select
+                        v-model="Room"
+                        :items="Rooms"
+                        label="Select Room"
+                        ></v-select>
+                        <!-- Action to do -->
+                        <v-textarea 
+                        label="Action to do :" 
+                        v-model="descripcion"
+                        ></v-textarea>
+                        <!-- Task DONE -->
+                        <div>Activate if task is done:</div>
+                        <v-switch 
+                        v-model="taskDone"
+                        ></v-switch>
+                        
+                        <!-- Date PICKER -->
+                        <div>Select a day: </div>
+                        <v-row justify="center">
+                        <v-date-picker 
+                        v-model="picker"
+                        full-width=""
+                        landscape=""
+                        ></v-date-picker>
+                        </v-row>
+                        <!-- Name of responsable -->
+                        <v-text-field
+                        v-model="name"
+                        :counter="30"
+                        label="Name of responsable"
+                        required
+                        ></v-text-field>
+                        <!-- @Email of responsable -->
+                        <v-text-field
+                        v-model="email"
+                        label="E-mail"
+                        required
+                        ></v-text-field>
+                        <!-- Phone Number -->
+                        <v-text-field
+                        v-model="phoneNumber"
+                        label="(phone number) +33"
+                        type="tel"
+                        required
+                        ></v-text-field>
                         <v-btn block color="warning" type="submit">Edit task</v-btn>
                     </v-form>
                 </v-card>
@@ -135,20 +183,20 @@
         </v-layout>
 
 
-        <!-- SNACKBAR // ALERT-->
-        <v-snackbar
-      v-model="snackbar"
+<!-- SNACKBAR // ALERT-->
+<v-snackbar
+v-model="snackbar"
 
     >
-      {{ mensaje }}
-      <v-btn
-        dark
-        text
-        @click="snackbar = false"
-      >
+    {{ snackbarText }}
+    <v-btn
+    dark
+    text
+    @click="snackbar = false"
+>
         Close
-      </v-btn>
-    </v-snackbar>
+</v-btn>
+</v-snackbar>
 
 
 
@@ -177,31 +225,20 @@ export default {
             'Room 3',
                 ],
 
-            tasksList: [
-                {
-                    id: 1,
-                    titulo: 'Titulo #1',
-                    descripcion: 'descripcion 1'
-                },
-                {
-                    id: 2,
-                    titulo: 'Titulo #2',
-                    descripcion: 'descripcion 2' 
-                }
-            ],
+            tasksList: [],
             Building: '',
             Appartment: '',
             Room: '',
             descripcion: '',
             taskDone: '',
             picker: '',
-            titulo: '',
+            name: '',
             email: '',
             phoneNumber: '',
 
 
             snackbar: false,
-            mensaje:'',
+            snackbarText:'',
 
             formAgregar: true,
 
@@ -214,9 +251,12 @@ export default {
     methods: {
         agregarTarea(){
             console.log(this.Building, this.Appartment, this.Room, this.descripcion, this.taskDone, this.picker,this.titulo,this.email,this.phoneNumber);
-            if(this.titulo === '' || this.descripcion === ''){
+            if( this.nombre === '' || 
+                this.descripcion === '' || 
+                this.Building ===''
+                ){
                 this.snackbar = true
-                this.mensaje = 'llena todos los campos'
+                this.snackbarText = 'llena todos los campos'
             }else{
                 this.tasksList.push({
                     id: Date.now(),
@@ -226,18 +266,25 @@ export default {
                     descripcion: this.descripcion,
                     taskDone: this.taskDone,
                     picker: this.picker,
-                    titulo: this.titulo,
+                    name: this.name,
                     email: this.email,
                     phoneNumber: this.phoneNumber
 
 
                 })
-                this.titulo = '',
-                this.descripcion = ''
+                this.Building = '',
+                this.Appartment = '',
+                this.Room = '',
+                this.descripcion = '',
+                this.taskDone = '',
+                this.picker = '',
+                this.name = '',
+                this.email = '',
+                this.phoneNumber = '',
 
 
                 this.snackbar = true
-                this.mensaje = 'Tarea agregada'
+                this.snackbarText = 'Task added correctly'
 
             }
         },
@@ -246,17 +293,33 @@ export default {
         },
         editarTarea(index){
             this.formAgregar = false
-            this.titulo = this.tasksList[index].titulo
+            this.Building = this.tasksList[index].Building
+            this.Appartment = this.tasksList[index].Appartment
+            this.Room = this.tasksList[index].Room
             this.descripcion = this.tasksList[index].descripcion
+            this.taskDone = this.tasksList[index].taskDone
+            this.picker = this.tasksList[index].picker
+            this.name = this.tasksList[index].name
+            this.email = this.tasksList[index].email
+            this.phoneNumber = this.tasksList[index].phoneNumber
             this.indexTarea = index
         },
         saveEdit(){
-            this.tasksList[this.indexTarea].titulo = this.titulo
+            this.tasksList[this.indexTarea].Building = this.Building
+            this.tasksList[this.indexTarea].Appartment = this.Appartment
+            this.tasksList[this.indexTarea].Room = this.Room
             this.tasksList[this.indexTarea].descripcion = this.descripcion
+            this.tasksList[this.indexTarea].taskDone = this.taskDone
+            this.tasksList[this.indexTarea].picker = this.picker
+            this.tasksList[this.indexTarea].name = this.name
+            this.tasksList[this.indexTarea].email = this.email
+            this.tasksList[this.indexTarea].phoneNumber = this.phoneNumber
             this.formAgregar = true
-            this.titulo = ''
+            this.name = ''
             this.descripcion = ''
-            this.mensaje = 'Edit correct'
+
+            this.snackbar = true
+            this.snackbarText = 'Edit correct'
             
         }
     }

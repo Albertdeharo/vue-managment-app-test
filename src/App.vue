@@ -7,24 +7,6 @@
       <v-toolbar-title>Managment task application with Vue.js</v-toolbar-title>
 
       <div class="flex-grow-1"></div>
-
-      <v-toolbar-items>
-        <v-btn text>Link 1</v-btn>
-        <v-btn text>Link 2</v-btn>
-        <v-btn text>Link 3</v-btn>
-      </v-toolbar-items>
-
-      <template v-if="$vuetify.breakpoint.smAndUp">
-        <v-btn icon>
-          <v-icon>mdi-export-variant</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-delete-circle</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-plus-circle</v-icon>
-        </v-btn>
-      </template>
     </v-toolbar>
   </div>
 
@@ -53,7 +35,7 @@
       <v-flex mx-3>
         <v-btn color="success" block :to="{name: 'home'}"> HOME </v-btn>
         <br>
-        <v-btn color="success" block :to="{name: 'tasks'}"> TASKS LIST </v-btn>
+        <v-btn color="success" block :to="{name: 'tasks'}"> TASKS </v-btn>
       </v-flex>
     </v-layout>
 
