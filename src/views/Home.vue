@@ -1,22 +1,24 @@
 <template>
-  <v-container>
-    <v-layout>
-      <v-flex>
 
 
+<v-img
+      src="https://i.blogs.es/99f0c0/vue/450_1000.png" 
+>
+<h1 class="text-center">
+{{title}}
+</h1>
+</v-img>
 
-        <h1>hello world with vue</h1>
-   
 
-      </v-flex>
-    </v-layout>
-  </v-container>
 </template>
 
+
 <script>
-
-
 export default {
-
+  data(){
+    return{
+    title: 'helloo world'
+    }
+  }
 };
 </script>

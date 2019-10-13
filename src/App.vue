@@ -1,21 +1,21 @@
 <template>
   <v-app>
-    <!-- TOOLBAR -->
-<div>
-    <v-toolbar src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
-       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Managment task application with Vue.js</v-toolbar-title>
 
-      <div class="flex-grow-1"></div>
+    
+    <!-- TOOLBAR -->
+  <div>
+    <v-toolbar dark>
+       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Managment application with Vue.js</v-toolbar-title>
     </v-toolbar>
   </div>
 
         <!-- SIDE MENU -->
 
-    <v-navigation-drawer 
+  <v-navigation-drawer 
     app 
     v-model="drawer" 
-    src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+    color = "black"
     temporary 
     >
 
@@ -47,6 +47,10 @@
     <v-content>
       <router-view/>
     </v-content>
+  
+  
+  
+  
   </v-app>
 </template>
 

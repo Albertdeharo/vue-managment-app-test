@@ -1,16 +1,21 @@
 <template>
     <v-container grid-list-xl>
         <v-layout row wrap>
-
                 <!-- CARD TASK TEMPALTE -->
             <v-flex md4>
                 <h1 class="text-center">CARDS LIST</h1>
-                <v-card class="mb-3" v-for="(item, index) in tasksList" :key="index">
+                <v-card 
+                color="teal lighten-3"
+                class="mb-3" 
+                v-for="(item, index) in tasksList" 
+                :key="index">
                     <v-card-text>
-                        <!-- TAG CHIP -->    
+                        <!-- TAG NAME CHIP -->
+                        <div class="text-center">    
                         <v-chip
                         class="ma-2"
-                        color="cyan"
+                        large
+                        color="teal darken-1"
                         label
                         text-color="white"
                         >
@@ -18,11 +23,37 @@
                         {{item.name}}
                         </v-chip>
                         <!-- taskDone show -->
-                        <span>{{item.taskDone}}</span>
+                        <!-- IF TRUE -->
+                        <span v-if="item.taskDone == true">
+                        <v-chip
+                        class="ma-2"
+                        small
+                        color="light-green"
+                        label
+                        text-color="white"
+                        >
+                        <v-icon left>mdi-label</v-icon>
+                        Task is already done
+                        </v-chip>
+                        </span>
+                        <!-- IF FALSE -->
+                        <span v-if="item.taskDone == false">
+                        <v-chip
+                        class="ma-2"
+                        small
+                        color="pink"
+                        label
+                        text-color="white"
+                        >
+                        <v-icon left>mdi-label</v-icon>
+                        Task pending to do
+                        </v-chip>
+                        </span>
+                        </div>
                         <!-- Date picker show -->
-                        <div class="font-weight-regular grey--text">
+                        <div class="font-weight-regular">
                         <v-icon>mdi-calendar</v-icon>
-                        {{item.picker}}</div>
+                        {{item.picker}}</div><br>
                         <!-- Building Appartment Room show -->
                         <div>
                            <v-icon>mdi-home-modern</v-icon>{{item.Building}} 
@@ -40,23 +71,33 @@
                         <v-icon>mdi-phone</v-icon>   
                         Phone number : {{item.phoneNumber}}</p>
 
-                        <v-btn color="warning" class="mx-3 ml-0"  @click="editarTarea(index)">
-                            <v-icon>mdi-nintendo-switch</v-icon>
-                            Editar</v-btn>
 
-                        <v-btn color="error" @click="eliminarTarea(item.id)">
-                            <v-icon>mdi-delete-circle</v-icon>
-                            Eliminar
+                        <!-- BUTTONS // EDIT AND ELIMINATE  -->
+                        <div class="text-center">
+
+                        <v-btn color="warning"
+                        class="mx-3 ml-0"  
+                        @click="editarTarea(index)">
+                        <v-icon
+                        small
+                        >mdi-nintendo-switch</v-icon>
+                        Editar</v-btn>
+
+                        <v-btn color="error"
+                         @click="eliminarTarea(item.id)">
+                        <v-icon
+                        small
+                        >mdi-delete-circle</v-icon>
+                        Eliminar
                         </v-btn>
+                        </div>
                     </v-card-text>
                 </v-card>
             </v-flex>
-
-
                     <!-- FORM -->
             <v-flex md8 v-if="formAgregar">
                 <h1 class="text-center">FORM</h1>
-                <v-card class="mb-3 pa-3">
+                <v-card color="#BBDEFB" class="mb-3 pa-3">
                     <v-form @submit.prevent="agregarTarea">
                         <!-- Building SELECT -->
                         <v-select
@@ -130,10 +171,10 @@
                     </v-form>
                 </v-card>
             </v-flex>
-
                     <!-- FORM EDIT VIEW -->
-            <v-flex md6 >
-                <v-card class="mb-3 pa-3" v-if="!formAgregar">
+            <v-flex md8  v-if="!formAgregar" >
+                <h1 class="text-center">EDIT FORM</h1>
+                <v-card color="orange lighten-4" class="mb-3 pa-3">
                     <v-form @submit.prevent="saveEdit">
                         <!-- Building SELECT -->
                         <v-select
@@ -208,7 +249,7 @@
             </v-flex>
 
 
-        </v-layout>
+            </v-layout>
 
 
                     <!-- SNACKBAR // ALERT-->
@@ -268,6 +309,7 @@ export default {
             snackbar: false,
             snackbarText:'',
 
+            
             formAgregar: true,
 
             indexTarea: '',
@@ -318,6 +360,9 @@ export default {
         },
         eliminarTarea(id){
             this.tasksList = this.tasksList.filter(e => e.id != id)
+            this.snackbar = true
+            this.snackbarText = 'Task deleted correctly'
+            this.formAgregar = true
         },
         editarTarea(index){
             this.formAgregar = false
@@ -354,9 +399,14 @@ export default {
             this.phoneNumber = ''
 
             this.snackbar = true
-            this.snackbarText = 'Edit correct'
+            this.snackbarText = 'Task edited'
             
         }
     }
 }
 </script>
+
+<style>
+    
+
+</style>
