@@ -94,7 +94,7 @@
                     </v-card-text>
                 </v-card>
             </v-flex>
-                    <!-- FORM -->
+                <!-- FORM -->
             <v-flex md8 v-if="formAgregar">
                 <h1 class="text-center">FORM</h1>
                 <v-card color="#BBDEFB" class="mb-3 pa-3">
@@ -171,7 +171,7 @@
                     </v-form>
                 </v-card>
             </v-flex>
-                    <!-- FORM EDIT VIEW -->
+                <!-- FORM EDIT VIEW -->
             <v-flex md8  v-if="!formAgregar" >
                 <h1 class="text-center">EDIT FORM</h1>
                 <v-card color="orange lighten-4" class="mb-3 pa-3">
@@ -247,30 +247,20 @@
                     </v-form>
                 </v-card>
             </v-flex>
-
-
-            </v-layout>
-
-
-                    <!-- SNACKBAR // ALERT-->
-                    <v-snackbar
-                            v-model="snackbar"
-
-                            >
-                            {{ snackbarText }}
-                            <v-btn
-                            dark
-                            text
-                            @click="snackbar = false"
-                            >
-                                Close
-                            </v-btn>
-                    </v-snackbar>
-
-
-
-
-
+        </v-layout>
+                <!-- SNACKBAR // ALERT-->
+        <v-snackbar
+            v-model="snackbar"
+            >
+            {{ snackbarText }}
+            <v-btn
+            dark
+            text
+            @click="snackbar = false"
+            >
+            Close
+            </v-btn>
+        </v-snackbar>
     </v-container>
 </template>
 
@@ -304,6 +294,7 @@ export default {
             name: '',
             email: '',
             phoneNumber: '',
+            indexTarea: '',
 
 
             snackbar: false,
@@ -311,11 +302,6 @@ export default {
 
             
             formAgregar: true,
-
-            indexTarea: '',
-
-
-
         }
     },
     methods: {
@@ -323,7 +309,7 @@ export default {
             console.log(this.Building, this.Appartment, this.Room, this.descripcion, this.taskDone, this.picker,this.titulo,this.email,this.phoneNumber);
             if( this.nombre === '' || 
                 this.descripcion === '' || 
-                this.Building ===''
+                this.Building === ''
                 ){
                 this.snackbar = true
                 this.snackbarText = 'Please insert all fields'
@@ -339,8 +325,6 @@ export default {
                     name: this.name,
                     email: this.email,
                     phoneNumber: this.phoneNumber
-
-
                 })
                 this.Building = '',
                 this.Appartment = '',
@@ -355,15 +339,16 @@ export default {
 
                 this.snackbar = true
                 this.snackbarText = 'Task added correctly'
-
             }
         },
+
         eliminarTarea(id){
             this.tasksList = this.tasksList.filter(e => e.id != id)
             this.snackbar = true
             this.snackbarText = 'Task deleted correctly'
             this.formAgregar = true
         },
+
         editarTarea(index){
             this.formAgregar = false
             this.Building = this.tasksList[index].Building
